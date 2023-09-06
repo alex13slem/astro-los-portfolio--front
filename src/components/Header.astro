@@ -1,0 +1,71 @@
+---
+import Container from './Container.astro';
+import NavToggler from './NavToggler.astro';
+import Navigation from './Navigation.astro';
+import SiteLogo from './SiteLogo.astro';
+
+const {class: className} = Astro.props;
+---
+
+<header class:list={['header', className]}>
+  <Container>
+    <SiteLogo />
+    <Navigation />
+    <NavToggler />
+  </Container>
+</header>
+
+<style>
+  .header {
+    z-index: 2;
+    position: sticky;
+    inset: 0;
+    bottom: auto;
+
+    &::after {
+      content: '';
+      background: var(--background);
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      transition: width 0.3s ease 0s;
+      z-index: -1;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+      width: 0%;
+    }
+
+    &.scroll {
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+  .container {
+    padding-block: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
+
+<script>
+  const header = document.querySelector('header');
+
+  window.addEventListener('scroll', toggleScrollClass);
+
+  function toggleScrollClass(e: any) {
+    const scrollPos = e.currentTarget?.scrollY;
+
+    if (scrollPos > 3) {
+      if (
+        header?.classList.contains('scroll') ||
+        document.body.classList.contains('show-nav')
+      )
+        return;
+      header?.classList.add('scroll');
+    } else {
+      header?.classList.remove('scroll');
+    }
+  }
+</script>

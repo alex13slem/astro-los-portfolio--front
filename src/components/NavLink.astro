@@ -1,0 +1,42 @@
+---
+const {className, to} = Astro.props;
+---
+
+<a class:list={['nav-link', className]} href={to}><slot /></a>
+
+<style>
+  .nav-link {
+    position: relative;
+    padding: 0.2rem 0.4rem;
+
+    font-size: 1.4rem;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+
+    &::after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      height: 0%;
+      width: 100%;
+      bottom: -1px;
+      left: 0px;
+      opacity: 1;
+      transition: all 0.3s ease 0s;
+      background: linear-gradient(
+        90deg,
+        var(--gradient-start),
+        var(--gradient-end)
+      );
+    }
+
+    &:is(:hover, :focus) {
+      color: var(--red-50);
+      &::after {
+        height: 100%;
+        width: 100%;
+        opacity: 1;
+      }
+    }
+  }
+</style>

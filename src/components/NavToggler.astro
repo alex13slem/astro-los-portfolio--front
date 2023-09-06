@@ -1,0 +1,64 @@
+---
+import {Icon} from 'astro-icon';
+---
+
+<button data-target="nav-toggler" class="nav-toggler">
+  <Icon class="menu" name="mdi:menu" />
+  <Icon class="close" name="mdi:close" />
+</button>
+
+<style>
+  .nav-toggler {
+    display: none;
+    width: 4.5rem;
+    height: 4.5rem;
+    position: relative;
+
+    outline-color: #00000000;
+    transition: outline-color 0.3s ease-in-out;
+
+    &:focus,
+    &:hover {
+      /* outline-offset: -4px; */
+      outline-color: var(--color);
+      outline: 1px dashed;
+    }
+  }
+  @media (max-width: 767.98px) {
+    .nav-toggler {
+      display: block;
+    }
+  }
+  .menu,
+  .close {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  :global(.show-nav) .menu {
+    opacity: 0;
+  }
+
+  .close {
+    opacity: 0;
+  }
+  :global(.show-nav) .close {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const root = document.body;
+  const togglers = document.querySelectorAll(
+    'button[data-target="nav-toggler"]'
+  );
+  togglers.length &&
+    togglers.forEach((toggler) => {
+      toggler.addEventListener('click', toggleMenu);
+    });
+
+  function toggleMenu() {
+    root.classList.toggle('show-nav');
+  }
+</script>
