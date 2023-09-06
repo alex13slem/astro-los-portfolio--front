@@ -1,13 +1,17 @@
 .button {
   min-width: 210px;
   width: fit-content;
-  padding: 2rem;
 
+  padding-inline: 2rem;
+  display: inline-block;
+
+  line-height: 3em;
+  color: currentColor;
   text-align: center;
   text-transform: uppercase;
   /* font-variant-caps: all-small-caps; */
 
-  border: 1px solid var(--color);
+  border: 1px solid rgb(var(--color));
 
   outline-offset: -2px;
   transition: outline-offset 0.3s ease-in-out;
@@ -15,6 +19,12 @@
   &:focus,
   &:hover {
     outline-offset: -4px;
-    outline: 1px dashed var(--color);
+    outline: 1px dashed rgb(var(--color));
   }
+}
+
+.title {
+  font-family: 'Exo 2';
+  font-weight: 700;
+  text-transform: uppercase;
 }

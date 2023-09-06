@@ -2,99 +2,84 @@
 import {Image} from 'astro:assets';
 import Container from '../components/Container.astro';
 import imgHeroSource from '../assets/img/hero.png';
-import Title from '../UI/Title.astro';
 
 const {class: className} = Astro.props;
 ---
-
-<style>
-  .hero {
-    padding-top: 80px;
-    margin-top: -80px;
-    /* min-height: 700px; */
-    height: 700px;
-    background-color: var(--red-500);
-
-    & p,
-    & h1 {
-      font-size: 1.6rem;
-      line-height: 1;
-    }
-  }
-
-  .container {
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: 600px auto;
-  }
-
-  .image {
-    & img {
-      object-fit: contain;
-      object-position: 0 100%;
-      width: 600px;
-    }
-    flex: 0 1 50%;
-  }
-
-  .content {
-    flex: 0 1 50%;
-    padding-block: 2.5rem;
-    display: grid;
-    /* gap: 1.5rem; */
-  }
-
-  .button {
-    margin-top: 2.3rem;
-  }
-
-  .title {
-    margin-top: 1rem;
-    margin-bottom: 1.2rem;
-    /* font-size: 6rem;
-    line-height: 1; */
-  }
-
-  @media (max-width: 1199.98px) {
-    .hero {
-      height: auto;
-      .container {
-        flex-direction: column;
-      }
-      .content {
-        order: -1;
-      }
-      .image {
-        height: 600px;
-        flex: 0 0 600px;
-        & img {
-          object-fit: cover;
-          object-position: 50% 0;
-        }
-      }
-    }
-  }
-</style>
 
 <section class:list={['hero', className]}>
   <Container>
     <div class="image"><Image src={imgHeroSource} alt="A.S.Scherba" /></div>
     <div class="content">
       <p>Привет, меня зовут</p>
-      <Title as={'h1'}>Александр Щерба</Title>
-      <Title>Александр Щерба</Title>
-      <Title as={'h3'}>Александр Щерба</Title>
-      <Title as={'h4'}>Александр Щерба</Title>
-      <Title as={'h5'}>Александр Щерба</Title>
-      <Title as={'h6'}>Александр Щерба</Title>
+      <h2 class="title">Александр Щерба</h2>
       <h1>WEB-разработчик из Гомеля</h1>
-      <a class="button" href="">Связаться</a>
+      <a class="button" target="_blank" href="https://t.me/a_s_scherba"
+        >Связаться</a
+      >
     </div>
   </Container>
 </section>
+
+<style>
+  .hero {
+    padding-block: 2em;
+    background-color: rgb(var(--accent));
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+  }
+
+  .image {
+    & img {
+      object-fit: cover;
+      object-position: 0 0;
+      aspect-ratio: 1;
+      border-radius: 6%;
+      outline: 2px dashed rgb(var(--color));
+      outline-offset: 4px;
+    }
+  }
+
+  .content {
+    & p {
+      margin: 0;
+    }
+    .title {
+      margin-bottom: 0.7rem;
+    }
+  }
+
+  .button {
+    margin-top: 2.1rem;
+  }
+
+  /* Только для планшетов и десктопов */
+  @media (min-width: 768px) {
+    .content {
+      flex: 0 0 50%;
+    }
+  }
+
+  /* Только для смартфонов */
+  @media (max-width: 767.98px) {
+    .container {
+      flex-direction: column;
+    }
+    .content {
+      order: -1;
+      align-self: start;
+    }
+    .image {
+      max-width: 420px;
+      align-self: end;
+    }
+  }
+</style>

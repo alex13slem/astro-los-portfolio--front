@@ -21,10 +21,11 @@ const {class: className} = Astro.props;
     position: sticky;
     inset: 0;
     bottom: auto;
+    background: rgb(var(--accent));
 
     &::after {
       content: '';
-      background: var(--background);
+      background: rgb(var(--background));
       position: absolute;
       top: 0;
       right: 0;

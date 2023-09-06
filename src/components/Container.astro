@@ -8,9 +8,9 @@ const {class: className, ...props} = Astro.props;
 
 <style>
   .container {
-    max-width: 1400px;
+    max-width: calc(var(--container-width) + (var(--container-offset) * 2));
     width: 100%;
-    padding-inline: 2.5rem;
+    padding-inline: var(--container-offset);
     margin-inline: auto;
   }
 </style>

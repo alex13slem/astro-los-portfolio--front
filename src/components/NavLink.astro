@@ -7,10 +7,9 @@ const {className, to} = Astro.props;
 <style>
   .nav-link {
     position: relative;
-    padding: 0.2rem 0.4rem;
+    padding-inline: 0.5em;
 
-    font-size: 1.4rem;
-    line-height: 2.8rem;
+    color: currentColor;
     text-transform: uppercase;
 
     &::after {
@@ -25,13 +24,13 @@ const {className, to} = Astro.props;
       transition: all 0.3s ease 0s;
       background: linear-gradient(
         90deg,
-        var(--gradient-start),
-        var(--gradient-end)
+        rgb(var(--gradient-start)),
+        rgb(var(--gradient-end))
       );
     }
 
     &:is(:hover, :focus) {
-      color: var(--red-50);
+      color: rgb(var(--red-50));
       &::after {
         height: 100%;
         width: 100%;

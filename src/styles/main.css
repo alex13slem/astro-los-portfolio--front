@@ -1,16 +1,19 @@
 :root {
   color-scheme: light;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
-
   font-family: 'Roboto Mono Variable', monospace;
   font-size: 10px;
 }
-body {
-  font-size: 1.4rem;
 
-  background-color: var(--background);
-  color: var(--color);
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--color));
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
