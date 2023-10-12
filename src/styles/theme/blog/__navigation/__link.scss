@@ -1,0 +1,23 @@
+.link[data-target='blog-navigation'] {
+  display: grid;
+  border-top: rgba(var(--accent)) solid 2px;
+
+  // &:first-of-type {
+  //   border-top: none;
+  // }
+  // &:last-of-type {
+  //   border-bottom: none;
+  // }
+
+  padding-inline: 1ch;
+  padding-block: 1em;
+  padding-left: 0;
+  color: rgba(var(--color));
+
+  // transition: text-shadow 0.3s ease-in-out;
+  &:hover,
+  &:focus {
+    filter: brightness(1.2);
+    text-shadow: 2px 2px rgba(var(--accent)), -3px -2px rgba(var(--color), 20%);
+  }
+}

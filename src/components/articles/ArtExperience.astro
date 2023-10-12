@@ -1,0 +1,25 @@
+---
+import type {IArtExperience} from '../../types/articles/IArtExperience';
+type Props = {id: number};
+
+const {id} = Astro.props;
+
+const url = `${import.meta.env.PUBLIC_API_ARTICLES}/${id}?populate=Picture`;
+
+const response = await fetch(url);
+const {data} = await response.json();
+// : {data: IArtExperience}
+console.log(data);
+const {data: pic} = data.attributes['Picture'];
+console.log(pic);
+---
+
+<article>
+  <h3>{data.attributes['Title']}</h3>
+  <img
+    src={import.meta.env.PUBLIC_URL + pic.attributes.url}
+    alt={data.attributes['Title']}
+  />
+  <p>{data.attributes['Description']}</p>
+  <a href={data.attributes['Link']}>Подробнее</a>
+</article>

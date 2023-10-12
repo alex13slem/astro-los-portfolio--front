@@ -1,0 +1,46 @@
+.toggler[data-target='site-navigation'] {
+  display: none;
+  width: 4.5rem;
+  height: 4.5rem;
+  position: relative;
+
+  outline-offset: 4px;
+  transition: outline-offset 0.3s ease-in-out;
+  background: transparent;
+  border: none;
+
+  &:focus,
+  &:hover {
+    outline-offset: 0px;
+    outline-color: rgb(var(--color));
+    outline: 1px dashed;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .menu,
+  .close {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .close {
+    opacity: 0;
+  }
+
+  .show-nav & .menu {
+    opacity: 0;
+  }
+
+  .show-nav & .close {
+    opacity: 1;
+  }
+
+  @media (max-width: 767.98px) {
+    display: flex;
+  }
+}

@@ -1,43 +1,16 @@
 ---
-// Supports weights 100-700
-import '@fontsource-variable/roboto-mono';
-import '@fontsource/exo-2';
-import '@fontsource/exo-2/700.css';
-import '../styles/index.css';
-import Header from '../components/Header.astro';
-import Navigation from '../components/Navigation.astro';
+import HTML from './HTML.astro';
 
 const {title} = Astro.props;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content="{Astro.generator}" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <div class="portal">
-      <Navigation />
-    </div>
-  </body>
-</html>
+<HTML title={title}>
+  <main>
+    <slot />
+  </main>
+</HTML>
 
-<style>
-  body.show-nav {
-    overflow: hidden;
-  }
-  body {
-    display: flex;
-    flex-direction: column;
-    height: 100dvh;
-  }
+<style lang="scss">
   main {
     flex: 1 1 100%;
   }

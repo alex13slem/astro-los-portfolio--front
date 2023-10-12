@@ -1,0 +1,48 @@
+---
+// Supports weights 100-700
+import '@fontsource-variable/roboto-mono';
+import '@fontsource/exo-2';
+import '@fontsource/exo-2/700.css';
+import '../styles/index.scss';
+import SiteHeader from '../components/SiteHeader.tsx';
+
+const {title} = Astro.props;
+---
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content="{Astro.generator}" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <SiteHeader client:only />
+    <slot />
+  </body>
+</html>
+
+<script>
+  import {isOpen} from '../store/SiteNavigationStore';
+
+  const body = document.body;
+  isOpen.subscribe((state) => {
+    if (state) {
+      body.classList.toggle('show-nav');
+    } else {
+      body.classList.remove('show-nav');
+    }
+  });
+</script>
+
+<style lang="scss">
+  body.show-nav {
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+</style>

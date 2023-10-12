@@ -1,13 +1,12 @@
 ---
 import {Image} from 'astro:assets';
-import Container from '../components/Container.astro';
 import imgHeroSource from '../assets/img/hero.png';
 
 const {class: className} = Astro.props;
 ---
 
-<section class:list={['hero', className]}>
-  <Container>
+<section class:list={['root', className]}>
+  <div class="container">
     <div class="image"><Image src={imgHeroSource} alt="A.S.Scherba" /></div>
     <div class="content">
       <p>Привет, меня зовут</p>
@@ -17,18 +16,13 @@ const {class: className} = Astro.props;
         >Связаться</a
       >
     </div>
-  </Container>
+  </div>
 </section>
 
-<style>
-  .hero {
-    padding-block: 2em;
+<style lang="scss">
+  .root {
+    padding-block: 4rem;
     background-color: rgb(var(--accent));
-  }
-
-  h1 {
-    font-size: 2rem;
-    line-height: 1;
   }
 
   .container {
@@ -48,17 +42,22 @@ const {class: className} = Astro.props;
     }
   }
 
-  .content {
-    & p {
-      margin: 0;
-    }
-    .title {
-      margin-bottom: 0.7rem;
-    }
+  p {
+    margin: 0;
+  }
+
+  .title {
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: normal;
   }
 
   .button {
-    margin-top: 2.1rem;
+    margin-top: 2rem;
   }
 
   /* Только для планшетов и десктопов */

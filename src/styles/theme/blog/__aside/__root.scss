@@ -1,0 +1,50 @@
+.root[data-target='blog-aside'] {
+  --v-line: 4px;
+  position: sticky;
+  top: var(--top, 0);
+  height: calc(100dvh - var(--header-height));
+  min-width: 0;
+  flex: 0 0 370px;
+  overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  background: rgba(var(--background));
+  border-right: rgba(var(--accent)) solid var(--v-line);
+
+  transition: top var(--tr-header-hide), height var(--tr-header-hide);
+
+  &::-webkit-scrollbar {
+    width: calc(
+      var(--v-line) * 2
+    ); /* в основном для вертикальных полос прокрутки */
+    // height: 10px; /* в основном для горизонтальных полос прокрутки */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /* плашка-бегунок */
+    background: rgba(var(--accent), 80%);
+
+    border-inline: calc(var(--v-line) / 2) solid rgba(var(--background));
+
+    transition: background 0.3s ease-in-out;
+
+    &:hover {
+      background: rgba(var(--accent), 100%);
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    /* фон */
+  }
+
+  &::-webkit-scrollbar-button {
+    // кнопки
+  }
+
+  &.full-screen {
+    height: 100dvh;
+  }
+}

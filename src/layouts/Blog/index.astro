@@ -1,0 +1,22 @@
+---
+import type {IBlogProps} from './IBlogProps';
+import Navigation from '../../components/Blog/Navigation';
+import HTML from '../HTML.astro';
+import Blog from '../../components/Blog/index.astro';
+import Aside from '../../components/Blog/Aside';
+
+type Props = IBlogProps;
+
+const {frontmatter, headings} = Astro.props;
+---
+
+<HTML title={'alex13slem | ' + frontmatter.title}>
+  <main class="root" data-target="blog-main">
+    <div class="container">
+      <Aside client:idle headings={headings} />
+      <Blog frontmatter={frontmatter}>
+        <slot />
+      </Blog>
+    </div>
+  </main>
+</HTML>

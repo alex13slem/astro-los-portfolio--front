@@ -1,0 +1,8 @@
+.root[data-target='blog-main'] {
+  & > .container {
+    display: flex;
+    align-items: start;
+
+    gap: 1em;
+  }
+}

@@ -1,0 +1,30 @@
+---
+// http://localhost:1337/api/sections/1
+
+import ArtExperience from '../components/articles/ArtExperience.astro';
+import type {ISectExperience} from '../types/sections/ISectExperience';
+
+const url = `${import.meta.env.PUBLIC_API_SECTIONS}/1?populate=articles`;
+
+const response = await fetch(url);
+const {data}: {data: ISectExperience} = await response.json();
+const {data: articles} = data.attributes.articles || [];
+---
+
+<section class="root">
+  <div class="container">
+    <h2>{data.attributes['Title']}</h2>
+
+    {articles.map(({id}) => <ArtExperience id={id} />)}
+  </div>
+</section>
+
+<style lang="scss">
+  .root {
+    padding-block: 4rem;
+  }
+
+  h2 {
+    margin-bottom: 1em;
+  }
+</style>

@@ -1,0 +1,98 @@
+/*
+  The CSS in this style tag is based off of Bear Blog's default CSS.
+  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ */
+
+:root {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2em;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: rgb(var(--color));
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.8rem;
+}
+h3 {
+  font-size: 1.6rem;
+}
+h4 {
+  font-size: 1.4rem;
+}
+h5 {
+  font-size: 1.2rem;
+}
+h6 {
+  font-size: 1rem;
+}
+strong,
+b {
+  font-weight: 700;
+}
+a:not([class]) {
+  color: rgb(var(--accent));
+}
+
+li:is([class]) {
+  list-style: none;
+}
+
+textarea {
+  width: 100%;
+  font-size: 1.6rem;
+}
+input {
+  font-size: 1.6rem;
+}
+
+table {
+  width: 100%;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+code {
+  padding: 2px 5px;
+  background-color: rgb(var(--accent), 50%);
+}
+pre {
+  padding: 1.5em;
+}
+pre > code {
+  all: unset;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgb(var(--color));
+}
+
+@media (max-width: 767.98px) {
+  body {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 319.98px) {
+  body {
+    font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,6 @@
+.root {
+  position: sticky;
+  inset: 0;
+  top: 0;
+  /* top: var(--top); */
+}
