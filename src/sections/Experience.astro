@@ -2,29 +2,32 @@
 // http://localhost:1337/api/sections/1
 
 import ArtExperience from '../components/articles/ArtExperience.astro';
-import type {ISectExperience} from '../types/sections/ISectExperience';
+import { fetchStrapiOneBySlug } from '../utils/helpers';
+import type { ISectExperience } from '../types/sections/ISectExperience';
 
-const url = `${import.meta.env.PUBLIC_API_SECTIONS}/1?populate=articles`;
+const sectionData = await fetchStrapiOneBySlug<ISectExperience>(
+  'sections',
+  'experience'
+);
 
-const response = await fetch(url);
-const {data}: {data: ISectExperience} = await response.json();
-const {data: articles} = data.attributes.articles || [];
+const { articles } = sectionData;
 ---
 
-<section class="root">
+<section id="experience" class="sect-experience">
   <div class="container">
-    <h2>{data.attributes['Title']}</h2>
-
-    {articles.map(({id}) => <ArtExperience id={id} />)}
+    <h2>{sectionData['Title']}</h2>
   </div>
+  {articles.map((data) => <ArtExperience data={data} />)}
 </section>
 
-<style lang="scss">
-  .root {
-    padding-block: 4rem;
+<style>
+  .sect-experience {
+    padding-top: 4rem;
   }
 
   h2 {
     margin-bottom: 1em;
+    text-decoration: underline;
+    text-align: right;
   }
 </style>

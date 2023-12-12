@@ -1,19 +1,18 @@
-import {type FunctionalComponent, type ComponentProps} from 'preact';
-import {type HTMLAttributes} from 'preact/compat';
+import css from './style.module.scss';
 
 import NavList from './NavList';
-import type {IBlogProps} from '../../../layouts/Blog/IBlogProps';
+import type { IBlogProps } from '../../../layouts/Blog/IBlogProps';
+import type { ComponentProps, FC, HTMLAttributes } from 'react';
 
 interface Props
-  extends ComponentProps<FunctionalComponent>,
+  extends ComponentProps<FC>,
     HTMLAttributes<HTMLDivElement>,
     Pick<IBlogProps, 'headings'> {}
 
-const Navigation: FunctionalComponent<Props> = ({headings}) => {
+const Navigation: FC<Props> = ({ headings }) => {
   return (
-    <div class="root" data-target="blog-navigation">
+    <div className={css.root}>
       <h2>Содержание:</h2>
-      <NavList headings={headings} />
       <NavList headings={headings} />
     </div>
   );

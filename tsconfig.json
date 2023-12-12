@@ -1,13 +1,13 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "C:/Users/user/Documents/Code/practice/portfolio/los-portfolio/front",
     "paths": {
       "LAYOUT_BLOG": [
         "src/layouts/Blog/index.astro"
       ]
     },
     "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    "jsxImportSource": "react"
   }
 }

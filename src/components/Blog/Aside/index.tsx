@@ -1,29 +1,24 @@
-import {type FunctionalComponent, type ComponentProps} from 'preact';
-import type {HTMLAttributes} from 'preact/compat';
 import Navigation from '../Navigation';
-import type {IBlogProps} from '../../../layouts/Blog/IBlogProps';
-import {useStore} from '@nanostores/preact';
-import {
-  revTop as StoreHeaderRevTop,
-  height as StoreHeaderHeight,
-  hide as StoreHeaderHide,
-} from '../../../store/SiteHeaderStore';
-import {cn} from '../../../utils/helpers';
+import type { IBlogProps } from '../../../layouts/Blog/IBlogProps';
+import { useStore } from '@nanostores/react';
+
+import { cn } from '../../../utils/helpers';
+import css from './style.module.scss';
+import { currentHeight } from '../../../store/header';
+import type { ComponentProps, FC, HTMLAttributes } from 'react';
 
 interface Props
-  extends ComponentProps<FunctionalComponent>,
+  extends ComponentProps<FC>,
     HTMLAttributes<HTMLDivElement>,
     Pick<IBlogProps, 'headings'> {}
 
-const Aside: FunctionalComponent<Props> = ({headings}) => {
-  const headerRevTop = useStore(StoreHeaderRevTop);
-  const headerHeight = useStore(StoreHeaderHeight);
-  const headerIsHide = useStore(StoreHeaderHide);
+const Aside: FC<Props> = ({ headings }) => {
+  const $headerHeight = useStore(currentHeight);
+
   return (
     <aside
-      className={cn('root', headerIsHide && 'full-screen')}
-      data-target="blog-aside"
-      style={`--top: ${headerRevTop}px; --header-height: ${headerHeight}px`}
+      className={cn(css.root, css.transition)}
+      style={{ '--top': `${$headerHeight}px` }}
     >
       <Navigation headings={headings} />
     </aside>

@@ -1,12 +1,9 @@
+import type { StrapiBaseImageType } from '../../strapi-client/types';
+
 export interface IArtExperience {
-  id: number;
-  attributes: {
-    Title: string;
-    Description: string;
-    Link: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    slug: string;
-  };
+  Title: string;
+  About: string;
+  Experience: string;
+  Link: string;
+  Picture: StrapiBaseImageType;
 }

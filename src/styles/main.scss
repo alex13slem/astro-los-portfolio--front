@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
-  font-family: 'Roboto Mono Variable', monospace;
-  font-size: 18px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 2em;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,4 +16,8 @@ body {
 
   word-wrap: break-word;
   overflow-wrap: break-word;
+
+  &:has(#navigation-mobile) {
+    overflow: hidden;
+  }
 }

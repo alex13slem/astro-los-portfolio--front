@@ -1,20 +1,14 @@
 ---
-import type {IBlogProps} from '../../layouts/Blog/IBlogProps';
+import type { IBlogProps } from '../../layouts/Blog/IBlogProps';
+import css from './style.module.scss';
 
 type Props = Pick<IBlogProps, 'frontmatter'>;
 
-const {frontmatter} = Astro.props;
+const { frontmatter } = Astro.props;
 ---
 
-<div class="root" data-target="blog">
+<div class={css.root}>
   <h1>{frontmatter.title}</h1>
   <blockquote><p>{frontmatter.description}</p></blockquote>
   <slot />
 </div>
-
-<style lang="scss">
-  .blog {
-    flex: 1 1 100%;
-    min-width: 0;
-  }
-</style>

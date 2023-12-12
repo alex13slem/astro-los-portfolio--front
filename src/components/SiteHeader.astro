@@ -1,0 +1,82 @@
+---
+import SiteLogo from './SiteLogo/index.tsx';
+import Header from './common/Header.tsx';
+
+import { cn } from '../utils/helpers.ts';
+import SiteNav from './SiteNav.astro';
+import NavToggler from './NavToggler';
+import HeaderHideBtn from './HeaderHideBtn';
+
+const { class: className, ...props } = Astro.props;
+---
+
+<Header client:only isFixed={true} className={cn('root')} {...props}>
+  <div class="container">
+    <SiteLogo />
+    <SiteNav />
+    <NavToggler client:load />
+  </div>
+  <HeaderHideBtn client:only />
+</Header>
+
+<style lang="scss">
+  .root {
+    position: sticky;
+    z-index: 2;
+    top: var(--handle-top, 0);
+
+    background: rgb(var(--accent));
+    border-bottom: 1px solid rgb(var(--accent));
+
+    transition: border-color 0.3s ease 0s;
+
+    &::after {
+      content: '';
+      background: rgb(var(--background));
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      transition: width 0.3s ease 0s;
+      z-index: -1;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+      width: 0%;
+    }
+
+    &:not(.on-top) {
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &.fixed {
+      transition: top var(--tr-header-hide);
+    }
+  }
+
+  .container {
+    padding-block: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  @media (max-width: 1023.98px) {
+    .container {
+      padding-block: 1rem;
+    }
+  }
+  @media (max-width: 767.98px) {
+    .root {
+      top: var(--auto-top, 0);
+      &:global(.hide) {
+        transform: translateY(0);
+      }
+      &.fixed {
+        transition: top 0.1s ease;
+      }
+      &.menu-isOpen {
+        top: 0;
+      }
+    }
+  }
+</style>

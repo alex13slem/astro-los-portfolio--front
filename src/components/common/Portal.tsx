@@ -1,13 +1,18 @@
-import {createWrapperAndAppendToBody} from '../../utils/helpers';
-import type {VNode} from 'preact';
-import {createPortal, useLayoutEffect, useState} from 'preact/compat';
+import { useLayoutEffect, useState, type ReactNode } from 'react';
+import { createWrapperAndAppendToBody } from '../../utils/helpers';
+import { createPortal } from 'react-dom';
 
 interface Props {
-  children?: VNode<{}>;
+  children?: ReactNode | false;
   wrapperId?: string;
+  class?: string;
 }
 
-const Portal = ({children, wrapperId = 'portal-wrapper'}: Props) => {
+const Portal = ({
+  children,
+  wrapperId = 'portal-wrapper',
+  class: className = '',
+}: Props) => {
   const [wrapperElement, setWrapperElement] = useState<HTMLElement>();
 
   useLayoutEffect(() => {
@@ -16,7 +21,7 @@ const Portal = ({children, wrapperId = 'portal-wrapper'}: Props) => {
 
     if (!element) {
       systemCreated = true;
-      element = createWrapperAndAppendToBody(wrapperId);
+      element = createWrapperAndAppendToBody(wrapperId, className);
     }
 
     setWrapperElement(element);

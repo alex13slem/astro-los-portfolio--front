@@ -1,8 +1,17 @@
-import {defineConfig} from 'astro/config';
+import { defineConfig } from 'astro/config';
+import rehypeExternalLinks from 'rehype-external-links';
 
-import preact from '@astrojs/preact';
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [preact()],
+  integrations: [react()],
+  markdown: {
+    rehypePlugins: [[rehypeExternalLinks, {
+      content: {
+        type: 'text',
+        value: ' 🔗'
+      }
+    }]]
+  }
 });

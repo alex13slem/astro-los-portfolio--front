@@ -1,25 +1,152 @@
 ---
-import type {IArtExperience} from '../../types/articles/IArtExperience';
-type Props = {id: number};
+import type { IArtExperience } from '../../types/articles/IArtExperience';
+import { parse } from 'marked';
 
-const {id} = Astro.props;
+type Props = { data: IArtExperience };
+const { data } = Astro.props;
 
-const url = `${import.meta.env.PUBLIC_API_ARTICLES}/${id}?populate=Picture`;
-
-const response = await fetch(url);
-const {data} = await response.json();
-// : {data: IArtExperience}
-console.log(data);
-const {data: pic} = data.attributes['Picture'];
-console.log(pic);
+const about = parse(data['About']);
+const experience = parse(data['Experience']);
 ---
 
 <article>
-  <h3>{data.attributes['Title']}</h3>
-  <img
-    src={import.meta.env.PUBLIC_URL + pic.attributes.url}
-    alt={data.attributes['Title']}
-  />
-  <p>{data.attributes['Description']}</p>
-  <a href={data.attributes['Link']}>Подробнее</a>
+  <div class="container">
+    <h3>{data['Title']}</h3>
+
+    <img
+      src={import.meta.env.PUBLIC_URL + data['Picture'].url}
+      alt={data['Title']}
+    />
+
+    <div class="about">
+      <h4><span>О</span> компании</h4>
+      <Fragment set:html={about} />
+    </div>
+
+    <div class="experience">
+      <h4><span>Мой</span> опыт</h4>
+      <Fragment set:html={experience} />
+    </div>
+
+    <a href={data['Link']} target="_blank"> Подробнее</a>
+  </div>
 </article>
+
+<style lang="scss">
+  article {
+    h3 span,
+    h4 span {
+      position: relative;
+      &::after {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        inset: 0px -0.33em;
+
+        background: rgb(var(--accent), 10%);
+        border-bottom: 1px solid rgb(var(--accent));
+      }
+    }
+
+    .container {
+      padding-block: 3rem;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: min-content;
+      row-gap: 1.5rem;
+      column-gap: 2ch;
+
+      & > a {
+        justify-self: end;
+      }
+    }
+
+    &:nth-child(2n) {
+      .container {
+        grid-template-areas:
+          'img title'
+          'img about'
+          'exp exp'
+          '. link';
+      }
+    }
+    &:nth-child(2n + 1) {
+      background-color: rgb(var(--accent), 10%);
+      .container {
+        grid-template-areas:
+          'title img'
+          'about img'
+          'exp exp'
+          '. link';
+
+        & > img {
+          justify-self: end;
+        }
+      }
+    }
+  }
+
+  h3 {
+    grid-area: title;
+  }
+
+  .container > img {
+    grid-area: img;
+    height: 370px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .about {
+    grid-area: about;
+  }
+
+  .experience {
+    grid-area: exp;
+  }
+
+  .container > a {
+    grid-area: link;
+    width: fit-content;
+    border-bottom: 2px dashed;
+  }
+
+  @media (max-width: 1023.98px) {
+    article {
+      &:nth-child(2n),
+      &:nth-child(2n + 1) {
+        .container {
+          grid-template-columns: auto 1fr;
+          grid-template-areas:
+            'title img'
+            'about about'
+            'exp exp'
+            'link link';
+        }
+      }
+    }
+  }
+  @media (max-width: 767.98px) {
+    article {
+      &:nth-child(2n),
+      &:nth-child(2n + 1) {
+        .container {
+          grid-template-columns: auto;
+          grid-template-areas:
+            'title'
+            'img'
+            'about'
+            'exp'
+            'link';
+        }
+      }
+      .container {
+        & > img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+</style>

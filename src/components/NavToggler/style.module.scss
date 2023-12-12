@@ -1,0 +1,48 @@
+.root {
+  display: none;
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+
+  padding: 0;
+  outline-offset: 4px;
+  transition: outline-offset 0.3s ease-in-out;
+  background: transparent;
+  border: none;
+
+  &:focus,
+  &:hover {
+    outline-offset: 0px;
+    outline-color: rgb(var(--color));
+    outline: 1px dashed;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .SVGmenu,
+  .SVGclose {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .SVGclose {
+    opacity: 0;
+  }
+
+  &.is-open {
+    .SVGmenu {
+      opacity: 0;
+    }
+    .SVGclose {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    display: flex;
+  }
+}

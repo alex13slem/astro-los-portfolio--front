@@ -1,0 +1,35 @@
+.root {
+  z-index: 1;
+  position: fixed;
+
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+  background: rgb(var(--background), 97%);
+
+  &:global(.enter) {
+    opacity: 0;
+  }
+  &:global(.enter-active) {
+    opacity: 1;
+    transition: opacity linear 500ms;
+  }
+  &:global(.exit) {
+    opacity: 1;
+  }
+  &:global(.exit-active) {
+    opacity: 0;
+    transition: opacity linear 500ms;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .root {
+    display: none;
+  }
+}

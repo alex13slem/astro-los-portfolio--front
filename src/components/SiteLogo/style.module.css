@@ -1,0 +1,10 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2rem;
+  line-height: 1;
+  color: currentColor;
+  font-weight: 900;
+}
