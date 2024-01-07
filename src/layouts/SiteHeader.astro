@@ -1,11 +1,11 @@
 ---
-import SiteLogo from './SiteLogo/index.tsx';
-import Header from './common/Header.tsx';
+import SiteLogo from '../components/SiteLogo.astro';
+import Header from '../components/common/Header.tsx';
 
 import { cn } from '../utils/helpers.ts';
-import SiteNav from './SiteNav.astro';
-import NavToggler from './NavToggler';
-import HeaderHideBtn from './HeaderHideBtn';
+import SiteNav from '../components/SiteNav.astro';
+import NavToggler from '../components/NavToggler/index.tsx';
+import HeaderHideBtn from '../components/HeaderHideBtn/index.tsx';
 
 const { class: className, ...props } = Astro.props;
 ---
@@ -25,14 +25,14 @@ const { class: className, ...props } = Astro.props;
     z-index: 2;
     top: var(--handle-top, 0);
 
-    background: rgb(var(--accent));
-    border-bottom: 1px solid rgb(var(--accent));
+    background: rgb(var(--c-accent));
+    border-bottom: 1px solid rgb(var(--c-accent));
 
     transition: border-color 0.3s ease 0s;
 
     &::after {
       content: '';
-      background: rgb(var(--background));
+      background: rgb(var(--c-bg));
       position: absolute;
       top: 0;
       right: 0;

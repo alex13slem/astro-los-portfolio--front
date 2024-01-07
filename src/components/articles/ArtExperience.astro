@@ -5,30 +5,33 @@ import { parse } from 'marked';
 type Props = { data: IArtExperience };
 const { data } = Astro.props;
 
-const about = parse(data['About']);
-const experience = parse(data['Experience']);
+const { link, thumb, title } = data;
+
+const PUBLIC_URL = import.meta.env.PUBLIC_URL;
+
+const TITLE = data['TitleMD'] && parse(data['TitleMD']);
+
+const DESCRIPTION = data['DescriptionMD'] && parse(data['DescriptionMD']);
+const BODY = data['BodyMD'] && parse(data['BodyMD']);
 ---
 
 <article>
   <div class="container">
-    <h3>{data['Title']}</h3>
+    <Fragment set:html={TITLE} />
 
-    <img
-      src={import.meta.env.PUBLIC_URL + data['Picture'].url}
-      alt={data['Title']}
-    />
+    <img src={PUBLIC_URL + thumb.url} alt={title} />
 
     <div class="about">
       <h4><span>О</span> компании</h4>
-      <Fragment set:html={about} />
+      <Fragment set:html={DESCRIPTION} />
     </div>
 
     <div class="experience">
       <h4><span>Мой</span> опыт</h4>
-      <Fragment set:html={experience} />
+      <Fragment set:html={BODY} />
     </div>
 
-    <a href={data['Link']} target="_blank"> Подробнее</a>
+    <a href={link} target="_blank"> Подробнее</a>
   </div>
 </article>
 
@@ -43,8 +46,8 @@ const experience = parse(data['Experience']);
         position: absolute;
         inset: 0px -0.33em;
 
-        background: rgb(var(--accent), 10%);
-        border-bottom: 1px solid rgb(var(--accent));
+        background: rgb(var(--c-accent), 10%);
+        border-bottom: 1px solid rgb(var(--c-accent));
       }
     }
 
@@ -72,7 +75,7 @@ const experience = parse(data['Experience']);
       }
     }
     &:nth-child(2n + 1) {
-      background-color: rgb(var(--accent), 10%);
+      background-color: rgb(var(--c-accent), 10%);
       .container {
         grid-template-areas:
           'title img'

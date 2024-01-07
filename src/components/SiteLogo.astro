@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<a href="/" class:list={['site-logo', className]} {...props}>@13</a>
+
+<style>
+  .site-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2rem;
+    line-height: 1;
+    color: currentColor;
+    font-weight: 900;
+  }
+</style>

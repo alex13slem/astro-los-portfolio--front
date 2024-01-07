@@ -4,7 +4,7 @@ import '@fontsource-variable/roboto-mono';
 import '@fontsource/exo-2';
 import '@fontsource/exo-2/700.css';
 import '../styles/index.scss';
-import SiteHeader from '../components/SiteHeader.astro';
+import SiteHeader from './SiteHeader.astro';
 import MobileMenu from '../components/MobileMenu/index.tsx';
 
 const {
@@ -41,3 +41,32 @@ const {
     min-height: 100svh;
   }
 </style>
+
+<script>
+  import { locationHash } from '../store/location';
+
+  locationHash.set(location.hash);
+  window.addEventListener('hashchange', () => {
+    locationHash.set(location.hash);
+  });
+
+  const sectionsH2 = document.querySelectorAll('section h2');
+
+  const setSectionHash: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const section = entry.target.closest('section');
+        const hash = section?.id ? '#' + section.id : '#';
+        history.replaceState({}, '', hash);
+        locationHash.set(hash);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(setSectionHash, {
+    threshold: 1,
+    rootMargin: '0px 0px -200px 0px',
+  });
+
+  sectionsH2.forEach((h2) => observer.observe(h2));
+</script>

@@ -11,8 +11,8 @@
   flex-direction: column;
   align-items: stretch;
 
-  background: rgba(var(--background));
-  border-right: rgba(var(--accent)) solid var(--v-line);
+  background: rgba(var(--c-bg));
+  border-right: rgba(var(--c-accent)) solid var(--v-line);
 
   &.transition {
     transition: top var(--tr-header-hide), height var(--tr-header-hide);
@@ -27,14 +27,14 @@
 
   &::-webkit-scrollbar-thumb {
     /* плашка-бегунок */
-    background: rgba(var(--accent), 80%);
+    background: rgba(var(--c-accent), 80%);
 
-    border-inline: calc(var(--v-line) / 2) solid rgba(var(--background));
+    border-inline: calc(var(--v-line) / 2) solid rgba(var(--c-bg));
 
     transition: background 0.3s ease-in-out;
 
     &:hover {
-      background: rgba(var(--accent), 100%);
+      background: rgba(var(--c-accent), 100%);
     }
   }
 

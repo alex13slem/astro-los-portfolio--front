@@ -1,6 +1,6 @@
 import css from './style.module.scss';
 
-import NavList from './NavList';
+import NavList from '../NavList';
 import type { IBlogProps } from '../../../layouts/Blog/IBlogProps';
 import type { ComponentProps, FC, HTMLAttributes } from 'react';
 

@@ -1,0 +1,83 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { IArtProjects } from '../../types/articles/IArtProjects';
+
+import { Picture } from 'astro:assets';
+import eisvilPic from '../../assets/img/projects/eisvil.png';
+import { parse } from 'marked';
+import TechLink from '../TechLink.astro';
+
+interface Props extends HTMLAttributes<'article'> {
+  data: IArtProjects;
+}
+
+const { class: className, data, ...props } = Astro.props;
+const { link, thumb, technologies, title } = data;
+const TITLE_MD = parse(data['TitleMD']);
+const DESCRIPTION_MD = parse(data['DescriptionMD']);
+
+const PICTURE = title.toLowerCase() === 'eisvil' && eisvilPic;
+---
+
+<article class:list={['', className]} {...props}>
+  <a href={link} target="_blank" class="thumb no-marker">
+    {
+      PICTURE && (
+        <Picture src={PICTURE} alt={`${title} Site`} class="site-pic" />
+      )
+    }
+  </a>
+  <div class="description">
+    <Fragment set:html={TITLE_MD} />
+    <div class="content">
+      <Fragment set:html={DESCRIPTION_MD} />
+      <div class="stack-icons">
+        <h4>Технологии:</h4>
+        {
+          [...technologies]
+            .sort((a, b) => a.order - b.order)
+            .map((data) => <TechLink {data} />)
+        }
+      </div>
+    </div>
+  </div>
+</article>
+
+<style lang="scss">
+  article {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid rgb(var(--c-accent));
+    :global(h3) {
+      padding-inline: 1.5rem;
+      background-color: rgb(var(--c-accent));
+      line-height: 2.5;
+    }
+  }
+  .site-pic {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+  }
+  .thumb {
+    flex: 1 1 500px;
+  }
+  .description {
+    flex: 1 1 50%;
+  }
+  .content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .stack-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    h4 {
+      margin: 0;
+    }
+  }
+</style>

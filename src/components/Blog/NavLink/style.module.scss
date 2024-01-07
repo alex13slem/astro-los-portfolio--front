@@ -1,0 +1,16 @@
+.root {
+  display: grid;
+  border-top: rgba(var(--c-accent)) solid 2px;
+
+  padding-inline: 1ch;
+  padding-block: 1em;
+  padding-left: 0;
+  color: rgba(var(--c-text));
+
+  &:hover,
+  &:focus {
+    filter: brightness(1.2);
+    text-shadow: 2px 2px rgba(var(--c-accent)),
+      -3px -2px rgba(var(--c-text), 20%);
+  }
+}

@@ -1,14 +1,14 @@
 .root {
   position: absolute;
-  background-color: rgb(var(--accent), 20%);
+  background-color: rgb(var(--c-accent), 20%);
   // background-color: transparent;
   backdrop-filter: hue-rotate(183deg) invert(100%) brightness(75%);
   top: 100%;
   right: var(--container-offset);
-  color: rgb(var(--background));
+  color: rgb(var(--c-bg));
   font-size: 2rem;
   border-radius: 0 0 1rem 1rem;
-  border: 1px solid rgb(var(--background));
+  border: 1px solid rgb(var(--c-bg));
   border-top: none;
   cursor: pointer;
 
@@ -23,7 +23,7 @@
   }
 
   &:hover {
-    background-color: rgba(var(--accent), 90%);
+    background-color: rgba(var(--c-accent), 90%);
   }
 
   &.hide {

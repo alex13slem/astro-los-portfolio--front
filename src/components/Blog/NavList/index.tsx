@@ -1,5 +1,5 @@
+import type { IBlogProps } from '../../../layouts/Blog/IBlogProps';
 import NavLink from '../NavLink';
-import type { IBlogProps } from '../../../../layouts/Blog/IBlogProps';
 
 import css from './style.module.scss';
 import type { ComponentProps, FC, HTMLAttributes } from 'react';

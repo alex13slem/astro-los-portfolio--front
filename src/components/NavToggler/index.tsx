@@ -17,9 +17,9 @@ const NavToggler: FC<Props> = ({ className }) => {
       onClick={toggler}
     >
       {$isOpen ? (
-        <MdOutlineClose class={css.SVGclose} />
+        <MdOutlineClose className={css.SVGclose} />
       ) : (
-        <MdMenu class={css.SVGmenu} />
+        <MdMenu className={css.SVGmenu} />
       )}
     </button>
   );

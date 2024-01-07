@@ -1,0 +1,85 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
+import { parse } from 'marked';
+import astroSVG from '../assets/img/technologies/astrojs.svg';
+import svelteSVG from '../assets/img/technologies/svelte.svg';
+import decapSVG from '../assets/img/technologies/decap.svg';
+import netlifySVG from '../assets/img/technologies/netlify.svg';
+import tgSVG from '../assets/img/technologies/telegram.svg';
+import type { IArtTechnology } from '../types/articles/IArtTechnology';
+
+interface Props extends HTMLAttributes<'div'> {
+  data: IArtTechnology;
+}
+
+const { class: className, data, ...props } = Astro.props;
+
+const { name, link, category } = data;
+const DESCRIPTION = parse(data['DescriptionMD']);
+const PICTURE =
+  (name.toLowerCase().includes('astro') && astroSVG) ||
+  (name.toLowerCase().includes('svelte') && svelteSVG) ||
+  (name.toLowerCase().includes('decap') && decapSVG) ||
+  (name.toLowerCase().includes('telegram') && tgSVG) ||
+  (name.toLowerCase().includes('netlify') && netlifySVG);
+
+const CATEGORY =
+  (category.toLowerCase().includes('web-framework') && 'WEB-Framework') ||
+  (category.toLowerCase().includes('ui-framework') && 'UI-Framework') ||
+  (category.toLowerCase().includes('cms') && 'CMS') ||
+  (category.toLowerCase().includes('hosting') && 'Hosting Platform') ||
+  (category.toLowerCase().includes('feedback') && 'Feedback Provider');
+---
+
+<div class:list={['item', className]} {...props}>
+  <a href={link} class="tech-link no-marker" target="_blank">
+    {PICTURE && <Image src={PICTURE} alt={name} class="tech-logo" />}
+  </a>
+  <div class="popup">
+    <h5>{CATEGORY}</h5>
+    <Fragment set:html={DESCRIPTION} />
+  </div>
+</div>
+
+<style lang="scss">
+  .item {
+    position: relative;
+  }
+  .tech-link {
+    transition: filter 0.3s ease-in-out;
+    &:hover {
+      filter: drop-shadow(0 0 5px rgb(var(--c-accent), 70%));
+      & + .popup {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+  .tech-logo {
+    height: 44px;
+    width: 44px;
+    @media (max-width: 767.98px) {
+      height: 1.5em;
+      width: 1.5em;
+    }
+  }
+
+  .popup {
+    width: 500px;
+    padding: 0.5rem;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background-color: rgb(var(--c-accent), 95%);
+    color: rgb(var(--c-bg));
+    border: thin solid rgb(var(--c-bg));
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: hue-rotate(50deg);
+    transition: opacity 0.3s ease-in-out;
+    @media (hover: none) {
+      display: none;
+    }
+  }
+</style>

@@ -1,9 +1,7 @@
 ---
 import type { IBlogProps } from './IBlogProps';
-import css from './style.module.scss';
 import HTML from '../HTML.astro';
-import Blog from '../../components/Blog/index.astro';
-import Aside from '../../components/Blog/Aside';
+import Aside from '../../components/blog/Aside';
 
 type Props = IBlogProps;
 
@@ -11,12 +9,21 @@ const { frontmatter, headings } = Astro.props;
 ---
 
 <HTML title={'alex13slem | ' + frontmatter.title}>
-  <main class={css.root}>
-    <div class="container">
-      <Aside client:only headings={headings} />
-      <Blog frontmatter={frontmatter}>
-        <slot />
-      </Blog>
-    </div>
-  </main>
+  <div class="container">
+    <Aside client:only headings={headings} />
+    <main class="prose">
+      <h1>{frontmatter.title}</h1>
+      <blockquote><p>{frontmatter.description}</p></blockquote>
+      <slot />
+    </main>
+  </div>
 </HTML>
+
+<style>
+  .container {
+    display: flex;
+    align-items: start;
+
+    gap: 1em;
+  }
+</style>

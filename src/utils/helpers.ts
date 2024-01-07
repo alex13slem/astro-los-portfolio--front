@@ -43,3 +43,7 @@ export async function fetchStrapiMany<Fields>(type: string) {
   const url = `${import.meta.env.PUBLIC_API}/${type}?populate=deep`;
   return await fetchStrapi<StrapiPaginatedArray<StrapiEntity & Fields>>(url);
 }
+export async function fetchStrapiSingle<Fields>(type: string) {
+  const url = `${import.meta.env.PUBLIC_API}/${type}?populate=deep`;
+  return await fetchStrapi<StrapiEntity & Fields>(url);
+}

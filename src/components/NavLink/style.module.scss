@@ -1,4 +1,4 @@
-.root {
+.nav-link {
   position: relative;
   padding-inline: 0.5em;
 
@@ -10,8 +10,10 @@
   transition: var(--tr-default);
   transition-property: border-color;
 
-  &:is(:hover, :focus) {
-    border-color: rgb(var(--color));
+  &:hover,
+  &:focus-visible,
+  &.active {
+    border-color: rgb(var(--c-text));
     &::after {
       height: 100%;
       width: 100%;

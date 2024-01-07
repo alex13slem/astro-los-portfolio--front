@@ -13,7 +13,7 @@
   &:focus,
   &:hover {
     outline-offset: 0px;
-    outline-color: rgb(var(--color));
+    outline-color: rgb(var(--c-text));
     outline: 1px dashed;
   }
 

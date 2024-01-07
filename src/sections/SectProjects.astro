@@ -1,0 +1,26 @@
+---
+import ArtProject from '../components/articles/ArtProject.astro';
+import type { ISectProjects } from '../types/sections/ISectProjects';
+import { fetchStrapiSingle } from '../utils/helpers';
+
+const { title, articles } =
+  await fetchStrapiSingle<ISectProjects>('sect-projects');
+---
+
+<section id="projects">
+  <div class="container">
+    <h2>{title}</h2>
+    {articles.map((data) => <ArtProject {data} />)}
+  </div>
+</section>
+
+<style style="scss">
+  section {
+    padding-block: 4rem;
+  }
+  h2 {
+    margin-bottom: 1.5em;
+    text-decoration: underline;
+    text-align: right;
+  }
+</style>

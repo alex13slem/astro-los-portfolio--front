@@ -11,7 +11,7 @@
   text-transform: uppercase;
   /* font-variant-caps: all-small-caps; */
 
-  border: 1px solid rgb(var(--color));
+  border: 1px solid rgb(var(--c-text));
 
   outline-offset: -2px;
   transition: outline-offset 0.3s ease-in-out;
@@ -19,6 +19,6 @@
   &:focus,
   &:hover {
     outline-offset: -4px;
-    outline: 1px dashed rgb(var(--color));
+    outline: 1px dashed rgb(var(--c-text));
   }
 }

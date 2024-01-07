@@ -6,7 +6,7 @@
 
   display: grid;
   place-items: center;
-  background: rgb(var(--background), 97%);
+  background: rgb(var(--c-bg), 97%);
 
   &:global(.enter) {
     opacity: 0;

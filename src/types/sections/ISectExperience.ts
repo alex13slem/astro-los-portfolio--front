@@ -1,6 +1,6 @@
-import type {IArtExperience} from '../articles/IArtExperience';
+import type { IArtExperience } from '../articles/IArtExperience';
 
 export interface ISectExperience {
-  Title: string;
+  title: string;
   articles: IArtExperience[];
 }

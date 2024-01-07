@@ -1,8 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import imgHeroSource from '../assets/img/hero.png';
+import { fetchStrapiSingle } from '../utils/helpers';
 
 const { class: className } = Astro.props;
+
+const { tg_link } = await fetchStrapiSingle<{ tg_link: string }>('sect-hero');
 ---
 
 <section class:list={['root', className]}>
@@ -11,10 +14,8 @@ const { class: className } = Astro.props;
     <div class="content">
       <p>Привет, меня зовут</p>
       <h2 class="title">Александр Щерба</h2>
-      <h1>WEB-разработчик из Гомеля</h1>
-      <a class="button" target="_blank" href="https://t.me/a_s_scherba"
-        >Связаться</a
-      >
+      <h1>Я - WEB-разработчик</h1>
+      <a class="button no-marker" target="_blank" href={tg_link}>Связаться</a>
     </div>
   </div>
 </section>
@@ -22,7 +23,7 @@ const { class: className } = Astro.props;
 <style lang="scss">
   .root {
     padding-block: 4rem;
-    background-color: rgb(var(--accent));
+    background-color: rgb(var(--c-accent));
   }
 
   .container {
@@ -37,7 +38,7 @@ const { class: className } = Astro.props;
       object-position: 0 0;
       aspect-ratio: 1;
       border-radius: 6%;
-      outline: 2px dashed rgb(var(--color));
+      outline: 2px dashed rgb(var(--c-text));
       outline-offset: 4px;
     }
   }

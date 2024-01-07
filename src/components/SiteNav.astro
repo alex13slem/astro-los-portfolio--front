@@ -1,30 +1,32 @@
 ---
 import { fetchStrapiMany } from '../utils/helpers.ts';
-import type { ISectExperience } from '../types/sections/ISectExperience.ts';
 
 import type { HTMLAttributes } from 'astro/types';
 import NavLink from './NavLink';
 
 interface Props extends HTMLAttributes<'nav'> {}
 
+type NavLinkType = {
+  text: string;
+  link: string;
+  order: number;
+};
+
 const { class: className, ...props } = Astro.props;
-const sections = await fetchStrapiMany<ISectExperience>('sections');
+const links = await fetchStrapiMany<NavLinkType>('nav-links').then((links) =>
+  links.sort((a, b) => a.order - b.order)
+);
 ---
 
 <nav class:list={['site-nav', className]} {...props}>
   {
-    sections.map((sect) => (
-      <NavLink
-        href={`/#${sect.slug}`}
-        active={sect.slug ? Astro.url.href.includes(sect.slug) : false}
-      >
-        {sect['Title']}
+    links.map(({ link, text }) => (
+      <NavLink client:only to={link}>
+        {text}
       </NavLink>
     ))
   }
-  <NavLink href={`#footer`} active={Astro.url.href.includes('#footer')}>
-    Контакты
-  </NavLink>
+  <NavLink client:only to={`#footer`}>Контакты</NavLink>
 </nav>
 
 <style>

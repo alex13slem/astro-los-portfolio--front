@@ -20,7 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: rgb(var(--color));
+  color: rgb(var(--c-text));
   line-height: 1.2;
   margin-bottom: 0.5em;
 }
@@ -49,7 +49,7 @@ a {
   font-size: 1rem;
 }
 
-a[target='_blank'] {
+a[target='_blank']:not(.no-marker, :has(img)) {
   &::after {
     display: inline-block;
     height: 1em;
@@ -76,11 +76,11 @@ b {
   font-weight: 700;
 }
 a:not([class]) {
-  color: rgb(var(--accent));
+  color: rgb(var(--c-accent));
 }
 
 a:focus-visible {
-  outline: 2px dashed rgb(var(--color));
+  outline: 2px dashed rgb(var(--c-text));
   outline-offset: 0.25em;
 }
 
@@ -105,7 +105,7 @@ img {
 }
 code {
   padding: 2px 5px;
-  background-color: rgb(var(--accent), 50%);
+  background-color: rgb(var(--c-accent), 50%);
 }
 pre {
   padding: 1.5em;
@@ -116,7 +116,152 @@ pre > code {
 
 hr {
   border: none;
-  border-top: 1px solid rgb(var(--color));
+  border-top: 1px solid rgb(var(--c-text));
+}
+
+.prose {
+  h1,
+  h2 {
+    margin-top: 2em;
+  }
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 1.5em;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  h1,
+  h2 {
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--c-accent));
+  }
+  p:not(:first-child) {
+    margin-top: 1rem;
+  }
+
+  img {
+    height: 10rem;
+    width: auto;
+  }
+
+  blockquote,
+  ol,
+  ul {
+    padding: 1rem 2rem;
+    border-left: 4px solid rgb(var(--c-accent));
+    margin-top: 1em;
+    font-size: 1.2em;
+
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: calc(100% + 5px);
+      width: 1rem;
+      height: 100%;
+
+      // transform: scaleY(110%);
+    }
+
+    img {
+      margin-top: 1em;
+    }
+  }
+
+  ol,
+  ul {
+    background: rgba(var(--c-accent), 20%);
+    &::before {
+      backdrop-filter: blur(1px) contrast(125%);
+      opacity: 50%;
+    }
+  }
+
+  ol {
+    padding-left: 4ch;
+
+    li {
+      position: relative;
+      list-style: none;
+
+      counter-increment: idx 1;
+
+      &::before {
+        z-index: -1;
+        width: 1.2em;
+        position: absolute;
+        content: counter(idx);
+        top: -0.5em;
+        left: -1ch;
+
+        font-size: 1.2em;
+        line-height: 1.2;
+        text-align: center;
+        color: rgba(var(--c-bg), 80%);
+
+        background: rgba(var(--c-accent), 80%);
+        border-radius: 50%;
+        box-shadow: -0.25rem -0.25rem rgba(var(--c-text), 66.6%);
+        opacity: 0.8;
+      }
+    }
+  }
+
+  blockquote {
+    background: rgba(var(--green), 20%);
+
+    &::before {
+      backdrop-filter: blur(1px) hue-rotate(83deg);
+      opacity: 50%;
+    }
+  }
+
+  li {
+    margin-top: 2em;
+  }
+
+  pre {
+    margin: 3rem 4ch;
+    margin-right: auto;
+  }
+
+  hr {
+    margin: 4rem auto;
+
+    height: 4px;
+    max-width: 370px;
+
+    background: rgb(var(--c-accent));
+    border: none;
+  }
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--c-text));
+
+    transition: color 0.3s steps(2);
+
+    &:hover {
+      color: rgba(var(--c-accent), 85%);
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    text-indent: 2rem;
+  }
+
+  h4 {
+    text-align: right;
+  }
 }
 
 @media (max-width: 767.98px) {
